@@ -6,16 +6,16 @@ spring:
       max-file-size: 100MB
       max-request-size: 100MB
   rabbitmq:
-    host: localhost
+    host: rabbitmq
     port: 5672
     username: guest
     password: guest
-minio:
-  default-bucket: "swe-csa-bucket"
-  access:
-    name: minioadmin
-    secret: minioadmin
-  url: http://localhost:9000/
+minio-adapter:
+  bucket: swe-csa-bucket
+  base-path:
+  url: http://minio:9000
+  access-key: minioadmin
+  secret-key: minioadmin
 rao-runner-server:
   amqp:
     client-app-id: swe-csa-runner
