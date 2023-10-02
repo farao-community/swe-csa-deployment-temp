@@ -28,18 +28,18 @@ patches:
       metadata:
         name: rao-runner
       spec:
-        replicas: 2
+        replicas: 1
         template:
           spec:
             containers:
               - name: rao-runner
                 resources:
                   requests:
-                    cpu: "14.0"
-                    memory: "50Gi"
+                    cpu: "1.0"
+                    memory: "5Gi"
                   limits:
-                    cpu: "16.0"
-                    memory: "64Gi"
+                    cpu: "2.0"
+                    memory: "6Gi"
 images:
   - name: minio
     newName: docker.io/bitnami/minio

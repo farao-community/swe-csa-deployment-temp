@@ -9,6 +9,8 @@ metadata:
     process: csa
 data:
   application.yml: |-
+    server:
+      port: 8080
     spring:
       application:
         name: swe-csa-runner

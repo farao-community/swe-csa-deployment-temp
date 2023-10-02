@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: rao-runner
-          image: gridcapa-rao-runner
+          image: rao-runner
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
@@ -46,14 +46,8 @@ spec:
                   name: gridcapa-minio-credentials
                   key: minio-secret-key
           volumeMounts:
-            - mountPath: /home/farao/.itools/config.yml
-              subPath: config.yml
-              name: rao-runner-itools-volume
             - mountPath: /config/application.yml
               subPath: application.yml
-              name: rao-runner-volume
-            - mountPath: /config/logback.xml
-              subPath: logback.xml
               name: rao-runner-volume
             - mountPath: /tmp
               name: tmp-emptydir
@@ -90,14 +84,8 @@ spec:
       restartPolicy: Always
       imagePullSecrets: []
       volumes:
-        - name: xpress-license
-          secret:
-            secretName: xpress-license
         - name: rao-runner-volume
           configMap:
             name: rao-runner
-        - name: rao-runner-itools-volume
-          configMap:
-            name: rao-runner-itools
         - name: tmp-emptydir
           emptyDir: {}

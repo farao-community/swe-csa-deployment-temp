@@ -25,3 +25,9 @@ Multiple urls are available:
 
 ## Deploying using Kubernetes
 TODO
+
+kubectl -n csa create secret generic gridcapa-rabbitmq-credentials --from-literal='rabbitmq-user=gridcapa' --from-literal='rabbitmq-password=gridcapaRABBITMQ1234*!'
+kubectl -n csa create secret generic admin-rabbitmq-credentials --from-literal='rabbitmq-user=gridcapa' --from-literal='rabbitmq-password=gridcapaRABBITMQ1234*!'
+kubectl -n csa create secret generic rabbitmq-secrets --from-literal='rabbitmq-erlang-cookie=GridCapa rabbitmq cookie!'
+kubectl -n csa create secret generic gridcapa-minio-credentials --from-literal='minio-access-key=gridcapa' --from-literal='minio-secret-key=gridcapaMINIO1234*!'
+

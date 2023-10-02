@@ -8,7 +8,7 @@ metadata:
     nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
     nginx.ingress.kubernetes.io/rewrite-target: /$2
     nginx.ingress.kubernetes.io/server-snippet: |
-      merge_slashes off;
+      merge_slashes on;
     nginx.ingress.kubernetes.io/service-upstream: "true"
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
     nginx.ingress.kubernetes.io/client-max-body-size: "50m"
@@ -16,12 +16,12 @@ metadata:
   labels:
     app: gridcapa
     component: gridcapa
-  name: gridcapa-dev
-  namespace: default
+  name: gridcapa-csa
+  namespace: csa
 spec:
   ingressClassName: nginx
   rules:
-    - host: gridcapa-dev.farao-community.com
+    - host: gridcapa-csa.farao-community.com
       http:
         paths:
           - backend:
@@ -47,5 +47,5 @@ spec:
             pathType: Prefix
   tls:
     - hosts:
-        - gridcapa-dev.farao-community.com
+        - gridcapa-csa.farao-community.com
       secretName: gridcapa-tls
