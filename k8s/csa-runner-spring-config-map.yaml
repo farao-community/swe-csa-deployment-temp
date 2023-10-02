@@ -16,6 +16,7 @@ data:
         name: swe-csa-runner
       rabbitmq:
         host: gridcapa-rabbitmq
+        virtual-host: vhost
         username: ${RABBITMQ_USER}
         password: ${RABBITMQ_PASSWORD}
         port: 5672

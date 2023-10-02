@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gridcapa-rabbitmq
+  labels:
+    app: gridcapa
+    component: gridcapa-rabbitmq
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rabbitmq
+      component: gridcapa-rabbitmq
+  template:
+    metadata:
+      labels:
+        app: rabbitmq
+        component: gridcapa-rabbitmq
+    spec:
+      containers:
+      - name: rabbitmq
+        image: rabbitmq:3.8.14-management-alpine
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+          - name: gridcapa-rabbitmq-configmap-volume
+            subPath: rabbitmq.conf
+            mountPath: /etc/rabbitmq/rabbitmq.conf
+        ports:
+        - containerPort: 5672
+        env:
+          - name: RABBITMQ_DEFAULT_PASS
+            valueFrom:
+              secretKeyRef:
+                name: gridcapa-rabbitmq-credentials
+                key: rabbitmq-password
+          - name: RABBITMQ_DEFAULT_USER
+            valueFrom:
+              secretKeyRef:
+                name: gridcapa-rabbitmq-credentials
+                key: rabbitmq-user
+        resources:
+          requests:
+            cpu: "1.0"
+            memory: "1Gi"
+      volumes:
+        - name: gridcapa-rabbitmq-configmap-volume
+          configMap:
+            name: gridcapa-rabbitmq-configmap

@@ -58,10 +58,10 @@ spec:
             readOnlyRootFilesystem: true
           resources:
             requests:
-              cpu: "8.0"
+              cpu: "14.0"
               memory: "20Gi"
             limits:
-              cpu: "8.0"
+              cpu: "16.0"
               memory: "30Gi"
           livenessProbe:
             httpGet:

@@ -7,16 +7,12 @@ metadata:
     component: gridcapa-rabbitmq
 spec:
   type: ClusterIP
+  selector:
+    app: rabbitmq
   ports:
     - name: http
       protocol: TCP
       port: 15672
-    - name: prometheus
-      protocol: TCP
-      port: 15692
-    - name: amqp
-      protocol: TCP
+    - name: rabbitmq-mgmt-port
       port: 5672
-  selector:
-    app: gridcapa
-    component: gridcapa-rabbitmq
+      targetPort: 5672

@@ -10,15 +10,10 @@ data:
     spring:
       rabbitmq:
         host: gridcapa-rabbitmq
+        virtual-host: vhost
         port: 5672
         username: ${RABBITMQ_USER}
         password: ${RABBITMQ_PASSWORD}
-      cloud:
-        stream:
-          bindings:
-            stop-in-0:
-              binder: rabbit
-              destination: stop-rao-runner
 
     minio:
       bucket: gridcapa
@@ -31,7 +26,7 @@ data:
     rao-runner:
       messages:
         rao-request:
-          queue-name: rao-request-queue
+          queue-name: swe-csa-rao-request-queue
       url:
         whitelist:
           - http://gridcapa-minio:9000/

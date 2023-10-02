@@ -16,18 +16,38 @@ docker-compose up -d
 
 **Be careful to your local resources if you try to deploy too many processes it could be quite heavy.**
 
-Multiple urls are available:
-- RabbitMQ management UI on page http://localhost/utils/rabbitmq/. Default credentials are guest/guest.
-- MinIO browser on page http://localhost/minio/. Default credentials are minioadmin/minioadmin.
-- Use postman giving a zip and at timestamp on UCT format, to run a rao directly or to create a CSA Request message that might be sent by rabbitmq UI.
+**Available Urls:**
 
-// TODO to complete with screenshots
+* **Minio:** http://localhost/minio/  Default credentials are minioadmin/minioadmin.
+
+* **RabbitMQ:** http://localhost/utils/rabbitmq/  Default credentials are guest/guest.
+
+* **Postman:** https://localhost/rao-integration/convert-to-request
+  - Use postman giving a zip and at timestamp on UCT format, to run a rao directly or to create a CSA Request message that might be sent by rabbitmq UI.
 
 ## Deploying using Kubernetes
-TODO
 
-kubectl -n csa create secret generic gridcapa-rabbitmq-credentials --from-literal='rabbitmq-user=gridcapa' --from-literal='rabbitmq-password=gridcapaRABBITMQ1234*!'
-kubectl -n csa create secret generic admin-rabbitmq-credentials --from-literal='rabbitmq-user=gridcapa' --from-literal='rabbitmq-password=gridcapaRABBITMQ1234*!'
-kubectl -n csa create secret generic rabbitmq-secrets --from-literal='rabbitmq-erlang-cookie=GridCapa rabbitmq cookie!'
-kubectl -n csa create secret generic gridcapa-minio-credentials --from-literal='minio-access-key=gridcapa' --from-literal='minio-secret-key=gridcapaMINIO1234*!'
+Some secrets are needed on the cluster as deployment prerequisites. Encrypted password can be obtained by default bcrypt algorithm.
 
+```bash
+kubectl -n csa create secret generic gridcapa-rabbitmq-credentials --from-literal='rabbitmq-user=****' --from-literal='rabbitmq-password=****'
+kubectl -n csa create secret generic gridcapa-minio-credentials --from-literal='minio-access-key=****' --from-literal='minio-secret-key=****'
+```
+
+### Deployment on Azure cluster
+
+- host: gridcapa-csa.farao-community.com
+- namespace: csa
+
+To deploy on Rte Azure cluster: 
+```bash
+kubectl kustomize k8s/ | ssh farao@51.137.209.168 kubectl --kubeconfig=.kube/config_new -n csa apply  -f -
+```
+
+**Available Urls:**
+
+* **Minio:** https://gridcapa-csa.farao-community.com/minio
+* **RabbitMQ:** https://gridcapa-csa.farao-community.com/utils/rabbitmq/
+* **Postman:** https://gridcapa-csa.farao-community.com/rao-integration/convert-to-request
+
+![postman-post.png](..%2F..%2F..%2FImages%2Fpostman-post.png)
