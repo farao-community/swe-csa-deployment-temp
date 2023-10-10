@@ -1,0 +1,49 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: csa-runner-configmap
+  labels:
+    app: gridcapa
+    component: runner
+    region: swe
+    process: csa
+data:
+  application.yml: |-
+    server:
+      port: 8080
+    spring:
+      application:
+        name: swe-csa-runner
+      rabbitmq:
+        host: gridcapa-rabbitmq
+        virtual-host: vhost
+        username: ${RABBITMQ_USER}
+        password: ${RABBITMQ_PASSWORD}
+        port: 5672
+        template:
+          reply-timeout: 7200000
+      cloud:
+        stream:
+          function:
+            definition: request
+          default:
+            binder: rabbit
+          bindings:
+            request-in-0:
+              destination: csa-request
+            request-out-0:
+              destination: csa-response
+            acknowledgement:
+              destination: csa-request-ack
+
+    rao-runner-server:
+      amqp:
+        client-app-id: swe-csa-runner
+        queue-name: swe-csa-rao-request-queue
+
+    minio-adapter:
+      bucket: gridcapa
+      base-path:
+      url: http://gridcapa-minio:9000/
+      access-key: ${MINIO_ACCESS_KEY}
+      secret-key: ${MINIO_SECRET_KEY}
