@@ -1,3 +1,9 @@
+load-flow:
+  default-impl-name: OpenLoadFlow
+
+sensitivity-analysis:
+  default-impl-name: OpenLoadFlow
+
 load-flow-default-parameters:
   voltageInitMode: DC_VALUES
   balanceType: PROPORTIONAL_TO_GENERATION_P
@@ -10,8 +16,9 @@ open-loadflow-default-parameters:
   plausibleActivePowerLimit: 10000
   maxIteration: 100
   newtonRaphsonConvEpsPerEq: 1.0E-3
-  minRealisticVoltage : 0.5
-  maxRealisticVoltage : 1.5
+  minRealisticVoltage: 0.5
+  maxRealisticVoltage: 1.5
+  throwsExceptionInCaseOfSlackDistributionFailure: true
 
 rao-objective-function:
   type: MAX_MIN_MARGIN_IN_AMPERE
@@ -21,15 +28,16 @@ rao-objective-function:
 rao-range-actions-optimization:
   max-mip-iterations: 5
   pst-penalty-cost: 0.01
-  pst-sensitivity-threshold : 0.0
+  pst-sensitivity-threshold : 0.1
   pst-model: APPROXIMATED_INTEGERS
 
 rao-linear-optimization-solver:
-  solver: CBC
+  solver: XPRESS
+  solver-specific-parameters: THREADS 1 MAXNODE 100000 MAXTIME 300
   relative-mip-gap: 0.001
 
 rao-topological-actions-optimization:
-  max-search-tree-depth: 2
+  max-search-tree-depth: 3
   relative-minimum-impact-threshold: 0.0
   absolute-minimum-impact-threshold: 1.0
 

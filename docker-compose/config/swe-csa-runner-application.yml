@@ -10,10 +10,12 @@ spring:
     port: 5672
     username: guest
     password: guest
+    template:
+      reply-timeout: 7200000
   cloud:
     stream:
       function:
-        definition: request
+        definition: interrupt;request
       default:
         binder: rabbit
       bindings:
@@ -23,6 +25,10 @@ spring:
           destination: csa-response
         acknowledgement:
           destination: csa-request-ack
+        interrupt-in-0:
+          destination: csa-interrupt
+        stop-rao:
+          destination: stop-rao-runner
 
 minio-adapter:
   bucket: swe-csa-bucket
