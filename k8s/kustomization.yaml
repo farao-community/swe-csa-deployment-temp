@@ -48,7 +48,7 @@ images:
     newName: docker.io/rabbitmq
     newTag: management
   - name: rao-runner
-    newName: docker.io/farao/gridcapa-rao-runner
+    newName: docker.io/farao/gridcapa-rao-runner  # TODO change my registry name
     newTag: v1.16.1
   - name: csa-runner
     newName: docker.io/farao/gridcapa-swe-csa-runner
