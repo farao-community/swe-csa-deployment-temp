@@ -12,12 +12,12 @@ services:
     command: server /data
 
   rao-runner:
-    image: farao/gridcapa-rao-runner:v1.16.1
+    image: farao/gridcapa-rao-runner:v1.21.0
     volumes:
       - ./config/rao-runner-application.yml:/config/application.yml
 
   swe-csa-runner:
-    image: farao/gridcapa-swe-csa-runner:1.0.0-test
+    image:  farao/gridcapa-swe-csa-runner:v1.2.0
     volumes:
       - ./config/swe-csa-runner-application.yml:/config/application.yml
       - ./config/swe-itools-config.yml:/home/farao/.itools/config.yml
