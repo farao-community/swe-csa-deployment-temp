@@ -12,14 +12,21 @@ services:
     command: server /data
 
   rao-runner:
-    image: farao/gridcapa-rao-runner:v1.21.0
+    image: farao/rao-runner:with-fast-rao
     volumes:
       - ./config/rao-runner-application.yml:/config/application.yml
 
   swe-csa-runner:
-    image:  farao/gridcapa-swe-csa-runner:v1.2.0
+    image: farao/gridcapa-swe-csa-runner:with-dichotomy
     volumes:
       - ./config/swe-csa-runner-application.yml:/config/application.yml
       - ./config/swe-itools-config.yml:/home/farao/.itools/config.yml
     ports:
       - "9090:9090"
+
+  csa-profiles-converter:
+    image: farao/csa-profiles-converter:latest
+    volumes:
+      - ./config/swe-csa-profiles-converter.yml:/config/application.yml
+    ports:
+      - "7070:7070"

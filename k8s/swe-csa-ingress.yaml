@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   annotations:
     nginx.ingress.kubernetes.io/configuration-snippet: |
-      rewrite ^/rao-integration$ /rao-integration permanent;
+      rewrite ^/csa-profiles-converter$ /csa-profiles-converter permanent;
     nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
     nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
     nginx.ingress.kubernetes.io/rewrite-target: /$2
@@ -40,10 +40,10 @@ spec:
             pathType: Prefix
           - backend:
               service:
-                name: csa-runner
+                name: csa-profiles-converter
                 port:
                   number: 80
-            path: /()(rao-integration/.*)
+            path: /()(csa-profiles-converter/.*)
             pathType: Prefix
   tls:
     - hosts:

@@ -16,7 +16,9 @@ resources:
   - csa-runner-service.yaml
   - csa-runner-spring-config-map.yaml
   - csa-runner-itools-config-map.yaml
-
+  - csa-profiles-converter-deployment.yaml
+  - csa-profiles-converter-service.yaml
+  - csa-profiles-converter-spring-config-map.yaml
 configMapGenerator:
   - name: env-configmap
     envs: [ env.properties ]
@@ -49,7 +51,10 @@ images:
     newTag: management
   - name: rao-runner
     newName: docker.io/farao/gridcapa-rao-runner
-    newTag: v1.16.1
+    newTag: search-tree-rao
   - name: csa-runner
     newName: docker.io/farao/gridcapa-swe-csa-runner
-    newTag: 1.0.0-test
+    newTag: dichotomy
+  - name: csa-profiles-converter
+    newName: docker.io/farao/gridcapa-csa-profiles-converter
+    newTag: dev

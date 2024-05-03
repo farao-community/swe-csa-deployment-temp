@@ -23,27 +23,44 @@ data:
         template:
           reply-timeout: 7200000
       cloud:
+        function:
+          definition: interrupt;request
         stream:
-          function:
-            definition: request
           default:
             binder: rabbit
           bindings:
+            interrupt-in-0:
+              destination: csa-interrupt
             request-in-0:
               destination: csa-request
             request-out-0:
               destination: csa-response
             acknowledgement:
               destination: csa-request-ack
-
+            stop-rao:
+              destination: stop-rao-runner
+  
     rao-runner-server:
       amqp:
         client-app-id: swe-csa-runner
         queue-name: swe-csa-rao-request-queue
-
-    minio-adapter:
-      bucket: gridcapa
-      base-path:
-      url: http://gridcapa-minio:9000/
-      access-key: ${MINIO_ACCESS_KEY}
-      secret-key: ${MINIO_SECRET_KEY}
+    dichotomy-parameters:
+      index:
+        precision: 50
+        max-iterations-by-border: 10
+    s3:
+      inputs:
+        bucket: swe-csa-bucket
+        user: ${MINIO_ACCESS_KEY}
+        secret: ${MINIO_SECRET_KEY}
+        url: http://gridcapa-minio:9000/
+      artifacts:
+        bucket: swe-csa-bucket
+        user: ${MINIO_ACCESS_KEY}
+        secret: ${MINIO_SECRET_KEY}
+        url: http://gridcapa-minio:9000/
+      outputs:
+        bucket: swe-csa-bucket
+        user: ${MINIO_ACCESS_KEY}
+        secret: ${MINIO_SECRET_KEY}
+        url: http://gridcapa-minio:9000/

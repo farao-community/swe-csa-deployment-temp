@@ -1,3 +1,5 @@
+rao:
+  default: FastRao
 load-flow:
   default-impl-name: OpenLoadFlow
 
