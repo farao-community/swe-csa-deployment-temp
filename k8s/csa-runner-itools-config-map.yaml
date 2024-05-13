@@ -11,7 +11,7 @@ metadata:
 data:
   config.yml: |-
     rao:
-      default: SearchTreeRao
+      default: FastRao
     load-flow:
       default-impl-name: OpenLoadFlow
 
