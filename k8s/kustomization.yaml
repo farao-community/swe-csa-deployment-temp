@@ -12,6 +12,7 @@ resources:
   - rao-runner-deployment.yaml
   - rao-runner-service.yaml
   - rao-runner-spring-config-map.yaml
+  - rao-runner-itools-config-map.yaml
   - csa-runner-deployment.yaml
   - csa-runner-service.yaml
   - csa-runner-spring-config-map.yaml
@@ -51,7 +52,7 @@ images:
     newTag: management
   - name: rao-runner
     newName: docker.io/farao/gridcapa-rao-runner
-    newTag: search-tree-rao
+    newTag: m-xpress
   - name: csa-runner
     newName: docker.io/farao/gridcapa-swe-csa-runner
     newTag: dichotomy

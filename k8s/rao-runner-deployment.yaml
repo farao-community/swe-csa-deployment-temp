@@ -46,11 +46,20 @@ spec:
                   name: gridcapa-minio-credentials
                   key: minio-secret-key
           volumeMounts:
+            - mountPath: /home/farao/.itools/config.yml
+              subPath: config.yml
+              name: rao-runner-itools-configmap-volume
             - mountPath: /config/application.yml
               subPath: application.yml
               name: rao-runner-volume
+            - mountPath: /config/logback.xml
+              subPath: logback.xml
+              name: rao-runner-volume
             - mountPath: /tmp
               name: tmp-emptydir
+            - mountPath: /home/farao/farao-dep/runtime/xpress/bin/xpauth.xpr
+              subPath: xpauth.xpr
+              name: xpress-license
           securityContext:
             allowPrivilegeEscalation: false
             runAsNonRoot: true
@@ -84,8 +93,14 @@ spec:
       restartPolicy: Always
       imagePullSecrets: []
       volumes:
+        - name: xpress-license
+          secret:
+            secretName: xpress-license
         - name: rao-runner-volume
           configMap:
             name: rao-runner
+        - name: rao-runner-itools-configmap-volume
+          configMap:
+            name: rao-runner-itools-configmap
         - name: tmp-emptydir
-          emptyDir: {}
+          emptyDir: { }

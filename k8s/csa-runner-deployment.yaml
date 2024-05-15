@@ -55,6 +55,9 @@ spec:
             - mountPath: /config/application.yml
               subPath: application.yml
               name: csa-runner-configmap-volume
+            - mountPath: /config/logback.xml
+              subPath: logback.xml
+              name: csa-runner-configmap-volume
             - mountPath: /home/farao/.itools/config.yml
               subPath: config.yml
               name: csa-runner-itools-configmap-volume

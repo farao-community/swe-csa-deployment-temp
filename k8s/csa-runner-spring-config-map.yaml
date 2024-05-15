@@ -63,6 +63,9 @@ data:
         user: ${MINIO_ACCESS_KEY}
         secret: ${MINIO_SECRET_KEY}
         url: http://gridcapa-minio:9000/
+    logging:
+      config: /config/logback.xml
+
   logback.xml: |-
     <?xml version="1.0" encoding="UTF-8"?>
     <configuration>
