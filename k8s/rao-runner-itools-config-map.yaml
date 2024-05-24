@@ -9,4 +9,4 @@ metadata:
 data:
   config.yml: |-
     rao:
-      default: FastRao
+      default: SearchTreeRao

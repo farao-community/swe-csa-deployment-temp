@@ -28,3 +28,11 @@ rao-runner:
     whitelist:
       - http://minio:9000/
 
+logging:
+  config: /config/logback.xml
+
+logback:
+  amqp:
+    exchange: csa-logs-exchange
+    routing-key: "#"
+
