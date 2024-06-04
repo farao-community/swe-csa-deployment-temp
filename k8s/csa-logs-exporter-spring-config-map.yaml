@@ -1,0 +1,26 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: csa-logs-exporter-configmap
+  labels:
+    app: gridcapa
+    component: csa-logs-exporter
+    region: swe
+    process: csa
+data:
+  application.yml: |-
+    server:
+      port: 8080
+    spring:
+      application:
+        name: csa-logs-exporter
+      servlet:
+        multipart:
+          max-file-size: 500MB
+          max-request-size: 500MB
+    s3:
+      artifacts:
+        bucket: swe-csa-bucket
+        user:  ${MINIO_ACCESS_KEY}
+        secret: ${MINIO_SECRET_KEY}
+        url: http://gridcapa-minio:9000/ 

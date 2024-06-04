@@ -20,6 +20,9 @@ resources:
   - csa-profiles-converter-deployment.yaml
   - csa-profiles-converter-service.yaml
   - csa-profiles-converter-spring-config-map.yaml
+  - csa-logs-exporter-deployment.yaml
+  - csa-logs-exporter-service.yaml
+  - csa-logs-exporter-spring-config-map.yaml
 configMapGenerator:
   - name: env-configmap
     envs: [ env.properties ]
@@ -52,10 +55,13 @@ images:
     newTag: management
   - name: rao-runner
     newName: docker.io/farao/gridcapa-rao-runner
-    newTag: m-xpress
+    newTag: latest
   - name: csa-runner
     newName: docker.io/farao/gridcapa-swe-csa-runner
-    newTag: dichotomy
+    newTag: latest
   - name: csa-profiles-converter
     newName: docker.io/farao/gridcapa-csa-profiles-converter
-    newTag: dev
+    newTag: latest
+  - name: csa-logs-exporter
+    newName: docker.io/farao/gridcapa-csa-logs-exporter
+    newTag: latest
