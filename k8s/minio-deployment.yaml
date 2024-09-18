@@ -91,11 +91,11 @@ spec:
             successThreshold: 1
           resources:
             requests:
-              cpu: "1.0"
-              memory: "350Mi"
+              cpu: "6.0"
+              memory: "2Gi"
             limits:
-              cpu: "2.0"
-              memory: "350Mi"
+              cpu: "8.0"
+              memory: "4Gi"
       restartPolicy: Always
       volumes:
         - name: gridcapa-minio-data

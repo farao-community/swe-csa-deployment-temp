@@ -21,7 +21,7 @@ data:
         password: ${RABBITMQ_PASSWORD}
         port: 5672
         template:
-          reply-timeout: 7200000
+          reply-timeout: 18000000
       cloud:
         function:
           definition: interrupt;request

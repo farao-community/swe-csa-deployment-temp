@@ -65,11 +65,11 @@ spec:
             successThreshold: 1
           resources:
             requests:
-              cpu: "1.0"
-              memory: "5Gi"
+              cpu: "6.0"
+              memory: "25Gi"
             limits:
-              cpu: "2.0"
-              memory: "8Gi"
+              cpu: "6.0"
+              memory: "30Gi"
       restartPolicy: Always
       volumes:
         - name: csa-profiles-converter-configmap-volume
