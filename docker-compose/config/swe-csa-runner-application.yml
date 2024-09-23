@@ -28,6 +28,10 @@ spring:
         stop-rao:
           destination: stop-rao-runner
 
+logback:
+  amqp:
+    exchange: swe-csa-logs-exchange
+    routing-key: "#"
 s3:
   inputs:
     bucket: swe-csa-bucket

@@ -33,6 +33,6 @@ logging:
 
 logback:
   amqp:
-    exchange: csa-logs-exchange
+    exchange: swe-csa-logs-exchange
     routing-key: "#"
 

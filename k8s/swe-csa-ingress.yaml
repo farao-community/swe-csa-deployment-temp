@@ -4,6 +4,14 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/configuration-snippet: |
       rewrite ^/csa-profiles-converter$ /csa-profiles-converter permanent;
+      rewrite ^/csa-logs-exporter$ /csa-logs-exporter permanent;
+      
+      rewrite ^/utils/rabbitmq$ /utils/rabbitmq/ permanent;
+      if ($request_uri ~ "^/utils/rabbitmq(/.*)") {
+        proxy_pass http://upstream_balancer$1;
+        break;
+      }
+
     nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
     nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
     nginx.ingress.kubernetes.io/rewrite-target: /$2
@@ -44,6 +52,13 @@ spec:
                 port:
                   number: 80
             path: /()(csa-profiles-converter/.*)
+            pathType: Prefix
+          - backend:
+              service:
+                name: csa-logs-exporter
+                port:
+                  number: 80
+            path: /()(csa-logs-exporter/.*)
             pathType: Prefix
   tls:
     - hosts:

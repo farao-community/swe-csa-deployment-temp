@@ -7,5 +7,4 @@ metadata:
     component: gridcapa-rabbitmq
 data:
   rabbitmq.conf: |-
-    default_vhost = vhost
     consumer_timeout = 86400000

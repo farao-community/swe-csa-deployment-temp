@@ -16,8 +16,43 @@ data:
         name: csa-logs-exporter
       servlet:
         multipart:
-          max-file-size: 500MB
-          max-request-size: 500MB
+          max-file-size: 800MB
+          max-request-size: 800MB
+      datasource:
+        url: jdbc:postgresql://postgres-db:5432/swe-csa-logs-db
+        driverClassName: org.postgresql.Driver
+        username: swe-csa
+        password: swe-csa
+      jpa:
+        hibernate:
+          ddl-auto: update
+        database-platform: org.hibernate.dialect.PostgreSQL9Dialect    
+      rabbitmq:
+        host: gridcapa-rabbitmq
+        port: 5672
+        username: ${RABBITMQ_USER}
+        password: ${RABBITMQ_PASSWORD}
+      cloud:
+        stream:
+          bindings:
+            consumeLogEvent-in-0:
+              destination: swe-csa-logs-exchange
+              consumer:
+                batch-mode: true
+          rabbit:
+            default:
+              consumer:
+                auto-bind-dlq: true
+                max-attempts: 1
+            bindings:
+              consumeLogEvent-in-0:
+                consumer:
+                  enable-batching: true
+                  batch-size: 200
+                  receive-timeout: 5000
+        function:
+          definition: consumeLogEvent
+
     s3:
       artifacts:
         bucket: swe-csa-bucket
