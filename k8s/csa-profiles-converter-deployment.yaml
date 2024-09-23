@@ -1,46 +1,36 @@
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-  name: csa-runner
+  name: csa-profiles-converter
   labels:
     app: gridcapa
-    component: runner
+    component: csa-profiles-converter
     region: swe
     process: csa
 spec:
   selector:
     matchLabels:
       app: gridcapa
-      component: runner
+      component: csa-profiles-converter
       region: swe
       process: csa
   template:
     metadata:
       labels:
         app: gridcapa
-        component: runner
+        component: csa-profiles-converter
         region: swe
         process: csa
       annotations:
         "cluster-autoscaler.kubernetes.io/safe-to-evict": "false"
     spec:
       containers:
-        - name: csa-runner
-          image: csa-runner
+        - name: csa-profiles-converter
+          image: csa-profiles-converter
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
           env:
-            - name: RABBITMQ_USER
-              valueFrom:
-                secretKeyRef:
-                  name: gridcapa-rabbitmq-credentials
-                  key: rabbitmq-user
-            - name: RABBITMQ_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: gridcapa-rabbitmq-credentials
-                  key: rabbitmq-password
             - name: MINIO_ACCESS_KEY
               valueFrom:
                 secretKeyRef:
@@ -54,13 +44,7 @@ spec:
           volumeMounts:
             - mountPath: /config/application.yml
               subPath: application.yml
-              name: csa-runner-configmap-volume
-            - mountPath: /config/logback.xml
-              subPath: logback.xml
-              name: csa-runner-configmap-volume
-            - mountPath: /home/farao/.itools/config.yml
-              subPath: config.yml
-              name: csa-runner-itools-configmap-volume
+              name: csa-profiles-converter-configmap-volume
           livenessProbe:
             httpGet:
               path: /actuator/health
@@ -81,17 +65,14 @@ spec:
             successThreshold: 1
           resources:
             requests:
-              cpu: "12.0"
-              memory: "50Gi"
+              cpu: "6.0"
+              memory: "25Gi"
             limits:
-              cpu: "16.0"
-              memory: "60Gi"
+              cpu: "6.0"
+              memory: "30Gi"
       restartPolicy: Always
       volumes:
-        - name: csa-runner-configmap-volume
+        - name: csa-profiles-converter-configmap-volume
           configMap:
-            name: csa-runner-configmap
-        - name: csa-runner-itools-configmap-volume
-          configMap:
-            name: csa-runner-itools-configmap
+            name: csa-profiles-converter-configmap
 

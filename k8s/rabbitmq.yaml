@@ -41,8 +41,8 @@ spec:
                 key: rabbitmq-user
         resources:
           requests:
-            cpu: "1.0"
-            memory: "1Gi"
+            cpu: "2.0"
+            memory: "5Gi"
       volumes:
         - name: gridcapa-rabbitmq-configmap-volume
           configMap:

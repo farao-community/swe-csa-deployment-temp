@@ -6,14 +6,19 @@ spring:
     password: guest
     template:
       reply-timeout: 7200000
-
-minio:
+  cloud:
+    stream:
+      bindings:
+        stop-in-0:
+          binder: rabbit
+          destination: stop-rao-runner
+minio-adapter:
   bucket: swe-csa-bucket
   base-path:
-  access:
-    name: minioadmin
-    secret: minioadmin
+  access-key: minioadmin
+  secret-key: minioadmin
   url: http://minio:9000
+
 
 rao-runner:
   messages:
@@ -22,4 +27,12 @@ rao-runner:
   url:
     whitelist:
       - http://minio:9000/
+
+logging:
+  config: /config/logback.xml
+
+logback:
+  amqp:
+    exchange: swe-csa-logs-exchange
+    routing-key: "#"
 

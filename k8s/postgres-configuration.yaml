@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-configuration
+  labels:
+    app: postgres-db
+data:
+  POSTGRES_DB: swe-csa-logs-db
+  POSTGRES_USER: swe-csa
+  POSTGRES_PASSWORD: swe-csa

@@ -9,14 +9,23 @@ resources:
   - rabbitmq.yaml
   - rabbitmq-service.yaml
   - rabbitmq-configmap.yaml
+  - postgres-db.yaml
+  - postgres-db-service.yaml
+  - postgres-configuration.yaml
   - rao-runner-deployment.yaml
   - rao-runner-service.yaml
   - rao-runner-spring-config-map.yaml
+  - rao-runner-itools-config-map.yaml
   - csa-runner-deployment.yaml
   - csa-runner-service.yaml
   - csa-runner-spring-config-map.yaml
   - csa-runner-itools-config-map.yaml
-
+  - csa-profiles-converter-deployment.yaml
+  - csa-profiles-converter-service.yaml
+  - csa-profiles-converter-spring-config-map.yaml
+  - csa-logs-exporter-deployment.yaml
+  - csa-logs-exporter-service.yaml
+  - csa-logs-exporter-spring-config-map.yaml
 configMapGenerator:
   - name: env-configmap
     envs: [ env.properties ]
@@ -28,28 +37,52 @@ patches:
       metadata:
         name: rao-runner
       spec:
-        replicas: 1
+        replicas: 2
         template:
           spec:
             containers:
               - name: rao-runner
                 resources:
                   requests:
-                    cpu: "14.0"
-                    memory: "20Gi"
+                    cpu: "8.0"
+                    memory: "30Gi"
                   limits:
                     cpu: "16.0"
-                    memory: "30Gi"
+                    memory: "50Gi"
+  - patch: |-
+      kind: Deployment
+      apiVersion: apps/v1
+      metadata:
+        name: csa-runner
+      spec:
+        replicas: 2
+        template:
+          spec:
+            containers:
+              - name: csa-runner
+                resources:
+                  requests:
+                    cpu: "6.0"
+                    memory: "20Gi"
+                  limits:
+                    cpu: "8.0"
+                    memory: "40Gi"
 images:
   - name: minio
     newName: docker.io/bitnami/minio
     newTag: 2021.6.17
   - name: rabbitmq
     newName: docker.io/rabbitmq
-    newTag: management
+    newTag: 3.8.14-management-alpine
   - name: rao-runner
     newName: docker.io/farao/gridcapa-rao-runner
-    newTag: v1.16.1
+    newTag: v1.26.0
   - name: csa-runner
-    newName: docker.io/farao/gridcapa-swe-csa-runner
-    newTag: 1.0.0-test
+    newName: docker.io/farao/gridcapa-swe-csa
+    newTag: v2.0.0
+  - name: csa-profiles-converter
+    newName: docker.io/farao/csa-profiles-converter
+    newTag: do-not-read-is-combinable-with-ra
+  - name: csa-logs-exporter
+    newName: docker.io/farao/csa-logs-exporter
+    newTag: snapshot
