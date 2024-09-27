@@ -1,0 +1,15 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: interruption-server-configmap
+  labels:
+    app: gridcapa
+    component: interruption-server
+data:
+  application.yml: |-
+    spring:
+      datasource:
+        url: jdbc:postgresql://postgres-db:5432/swe-csa-logs-db
+        driverClassName: org.postgresql.Driver
+        username: swe-csa
+        password: swe-csa

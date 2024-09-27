@@ -26,6 +26,8 @@ data:
       url:
         whitelist:
           - http://gridcapa-minio:9000/
+        interrupt-server-url: http://interruption-server/interrupted/
+
     server:
       port: 8080
     logging:
