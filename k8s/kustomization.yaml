@@ -26,9 +26,6 @@ resources:
   - csa-logs-exporter-deployment.yaml
   - csa-logs-exporter-service.yaml
   - csa-logs-exporter-spring-config-map.yaml
-  - gridcapa-interruption-server-configmap.yaml
-  - gridcapa-interruption-server-deployment.yaml
-  - gridcapa-interruption-server-service.yaml
 configMapGenerator:
   - name: env-configmap
     envs: [ env.properties ]
@@ -79,7 +76,7 @@ images:
     newTag: 3.8.14-management-alpine
   - name: rao-runner
     newName: docker.io/farao/gridcapa-rao-runner
-    newTag: v1.26.0
+    newTag: v1.30.0
   - name: csa-runner
     newName: docker.io/farao/gridcapa-swe-csa
     newTag: snapshot
@@ -89,6 +86,3 @@ images:
   - name: csa-logs-exporter
     newName: docker.io/farao/csa-logs-exporter
     newTag: snapshot
-  - name: gridcapa-interruption-server
-    newName: docker.io/farao/gridcapa-interruption-server
-    newTag: latest
