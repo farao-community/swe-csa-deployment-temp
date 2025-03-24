@@ -13,6 +13,15 @@ data:
         port: 5672
         username: ${RABBITMQ_USER}
         password: ${RABBITMQ_PASSWORD}
+        template:
+          reply-timeout: 12000000
+      cloud:
+        stream:
+          bindings:
+            stop-in-0:
+              binder: rabbit
+              destination: stop-rao-runner
+    
     minio-adapter:
       bucket: swe-csa-bucket
       base-path:

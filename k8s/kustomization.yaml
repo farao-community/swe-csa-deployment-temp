@@ -49,6 +49,8 @@ patches:
                   limits:
                     cpu: "16.0"
                     memory: "50Gi"
+            imagePullSecrets:
+              - name: dockerhub-acr-secret
   - patch: |-
       kind: Deployment
       apiVersion: apps/v1
@@ -75,8 +77,8 @@ images:
     newName: docker.io/rabbitmq
     newTag: 3.8.14-management-alpine
   - name: rao-runner
-    newName: docker.io/farao/gridcapa-rao-runner
-    newTag: v1.30.0
+    newName: docker.io/farao/gridcapa-rao-runner-with-xpress
+    newTag: v1.35.0
   - name: csa-runner
     newName: docker.io/farao/gridcapa-swe-csa
     newTag: snapshot
