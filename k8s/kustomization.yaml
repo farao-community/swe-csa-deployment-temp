@@ -26,9 +26,6 @@ resources:
   - csa-logs-exporter-deployment.yaml
   - csa-logs-exporter-service.yaml
   - csa-logs-exporter-spring-config-map.yaml
-  - gridcapa-interruption-server-configmap.yaml
-  - gridcapa-interruption-server-deployment.yaml
-  - gridcapa-interruption-server-service.yaml
 configMapGenerator:
   - name: env-configmap
     envs: [ env.properties ]
@@ -52,6 +49,8 @@ patches:
                   limits:
                     cpu: "16.0"
                     memory: "50Gi"
+            imagePullSecrets:
+              - name: dockerhub-acr-secret
   - patch: |-
       kind: Deployment
       apiVersion: apps/v1
@@ -78,8 +77,8 @@ images:
     newName: docker.io/rabbitmq
     newTag: 3.8.14-management-alpine
   - name: rao-runner
-    newName: docker.io/farao/gridcapa-rao-runner
-    newTag: v1.26.0
+    newName: docker.io/farao/gridcapa-rao-runner-with-xpress
+    newTag: v1.35.0
   - name: csa-runner
     newName: docker.io/farao/gridcapa-swe-csa
     newTag: snapshot
@@ -89,6 +88,3 @@ images:
   - name: csa-logs-exporter
     newName: docker.io/farao/csa-logs-exporter
     newTag: snapshot
-  - name: gridcapa-interruption-server
-    newName: docker.io/farao/gridcapa-interruption-server
-    newTag: latest
