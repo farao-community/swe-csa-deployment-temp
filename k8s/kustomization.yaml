@@ -37,7 +37,7 @@ patches:
       metadata:
         name: rao-runner
       spec:
-        replicas: 1
+        replicas: 2
         template:
           spec:
             containers:
@@ -45,10 +45,10 @@ patches:
                 resources:
                   requests:
                     cpu: "8.0"
-                    memory: "30Gi"
+                    memory: "10Gi"
                   limits:
-                    cpu: "16.0"
-                    memory: "50Gi"
+                    cpu: "9.0"
+                    memory: "20Gi"
             imagePullSecrets:
               - name: dockerhub-acr-secret
   - patch: |-
@@ -64,11 +64,11 @@ patches:
               - name: csa-runner
                 resources:
                   requests:
-                    cpu: "6.0"
-                    memory: "20Gi"
+                    cpu: "2.0"
+                    memory: "10Gi"
                   limits:
-                    cpu: "8.0"
-                    memory: "40Gi"
+                    cpu: "4.0"
+                    memory: "20Gi"
 images:
   - name: minio
     newName: docker.io/bitnami/minio

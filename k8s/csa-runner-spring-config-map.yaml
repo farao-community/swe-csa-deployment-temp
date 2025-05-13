@@ -121,13 +121,36 @@ data:
             <appender-ref ref="amqp-business-events"/>
             <appender-ref ref="STDOUT"/>
         </logger>
-       
-        <root level="info">
+        <logger name="com.powsybl.openrao.commons.logs.RaoBusinessLogs" additivity="false"  level="INFO">
+            <appender-ref ref="amqp-business-events"/>
             <appender-ref ref="STDOUT"/>
-        </root>
-        <logger name="org.springframework.amqp" level="OFF"/>
-        <logger name="com.powsybl" level="OFF"/>
-        <logger name="com.powsybl.openloadflow" level="OFF"/>
-        <logger name="com.powsybl.openrao" level="INFO"/>
-        <logger name="com.powsybl.openrao.commons.logs.TechnicalLogs" level="OFF"/>
+        </logger>
+        <logger name="com.powsybl.openrao.commons.logs.RaoBusinessWarns" additivity="false"  level="WARN">
+            <appender-ref ref="amqp-business-events"/>
+            <appender-ref ref="STDOUT"/>
+        </logger>
+        
+          
+        <logger name="com.powsybl.openrao" level="INFO" additivity="false" >
+            <appender-ref ref="STDOUT"/>
+        </logger>    
+        <logger name="com.powsybl.commons" level="WARN" additivity="false" >
+            <appender-ref ref="STDOUT"/>
+        </logger>
+        <logger name="com.powsybl.openrao.virtualhubs" level="WARN" additivity="false" >
+            <appender-ref ref="STDOUT"/>
+        </logger>
+        <logger name="com.powsybl" level="ERROR" additivity="false" >
+            <appender-ref ref="STDOUT"/>
+        </logger>
+        <logger name="com.powsybl.openrao.commons.logs.TechnicalLogs" level="ERROR" additivity="false" >
+            <appender-ref ref="STDOUT"/>
+        </logger>
+        <logger name="com.powsybl.openloadflow" level="ERROR" additivity="false" >
+            <appender-ref ref="STDOUT"/>
+        </logger>
+        <logger name="org.springframework.amqp" level="OFF" additivity="false" >
+            <appender-ref ref="STDOUT"/>
+        </logger>
+
     </configuration>
