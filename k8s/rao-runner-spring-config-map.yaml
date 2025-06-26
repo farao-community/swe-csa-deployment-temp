@@ -17,10 +17,16 @@ data:
           reply-timeout: 12000000
       cloud:
         stream:
+          default:
+            binder: rabbit
           bindings:
             stop-in-0:
-              binder: rabbit
               destination: stop-rao-runner
+          rabbit:
+            bindings:
+              stop-in-0:
+                consumer:
+                  bindingRoutingKey: "#"
     
     minio-adapter:
       bucket: swe-csa-bucket
@@ -100,28 +106,25 @@ data:
         You should bind with "amqp-business-events" appender only Loggers you want to see in gridcapa processes as a final user-->
         <logger name="RAO_RUNNER_BUSINESS_LOGGER" additivity="false" level="INFO">
             <appender-ref ref="amqp-business-events"/>
-            <appender-ref ref="STDOUT"/>
         </logger>
         <logger name="com.powsybl.openrao.commons.logs.RaoBusinessLogs" level="INFO">
             <appender-ref ref="amqp-business-events"/>
-            <appender-ref ref="STDOUT"/>
         </logger>
         <logger name="com.powsybl.openrao.commons.logs.RaoBusinessWarns" level="WARN">
             <appender-ref ref="amqp-business-events"/>
-            <appender-ref ref="STDOUT"/>
-        </logger>
-        <logger name="com.powsybl.openrao.commons.logs.TechnicalLogs" level="INFO">
-            <appender-ref ref="STDOUT"/>
         </logger>
 
-
+       
         <root level="info">
             <appender-ref ref="STDOUT"/>
         </root>
 
         <logger name="com.powsybl.openrao" level="INFO"/>
-        <logger name="com.powsybl.openloadflow" level="ERROR"/>
         <logger name="com.powsybl.commons" level="WARN"/>
         <logger name="com.powsybl.openrao.virtualhubs" level="WARN"/>
-        <logger name="com.powsybl" level="OFF"/>
+        <logger name="com.powsybl" level="ERROR"/>    
+        <logger name="com.powsybl.openrao.commons.logs.TechnicalLogs" level="ERROR"/>
+        <logger name="com.powsybl.openloadflow" level="ERROR"/>
+        <logger name="org.springframework.amqp" level="OFF"/>
+
     </configuration>

@@ -19,8 +19,8 @@ metadata:
       merge_slashes on;
     nginx.ingress.kubernetes.io/service-upstream: "true"
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
-    nginx.ingress.kubernetes.io/client-max-body-size: "50m"
-    nginx.ingress.kubernetes.io/proxy-body-size: "50m"
+    nginx.ingress.kubernetes.io/client-max-body-size: "900m"
+    nginx.ingress.kubernetes.io/proxy-body-size: "900m"
   labels:
     app: gridcapa
     component: gridcapa
