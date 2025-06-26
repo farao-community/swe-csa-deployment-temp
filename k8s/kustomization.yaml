@@ -44,11 +44,11 @@ patches:
               - name: rao-runner
                 resources:
                   requests:
-                    cpu: "8.0"
-                    memory: "10Gi"
+                    cpu: "14.0"
+                    memory: "30Gi"
                   limits:
-                    cpu: "9.0"
-                    memory: "20Gi"
+                    cpu: "16.0"
+                    memory: "40Gi"
             imagePullSecrets:
               - name: dockerhub-acr-secret
   - patch: |-
@@ -78,7 +78,7 @@ images:
     newTag: 3.8.14-management-alpine
   - name: rao-runner
     newName: docker.io/farao/gridcapa-rao-runner-with-xpress
-    newTag: v1.35.0
+    newTag: v1.38.0
   - name: csa-runner
     newName: docker.io/farao/gridcapa-swe-csa
     newTag: snapshot

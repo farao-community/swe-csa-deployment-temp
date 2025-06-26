@@ -17,10 +17,16 @@ data:
           reply-timeout: 12000000
       cloud:
         stream:
+          default:
+            binder: rabbit
           bindings:
             stop-in-0:
-              binder: rabbit
               destination: stop-rao-runner
+          rabbit:
+            bindings:
+              stop-in-0:
+                consumer:
+                  bindingRoutingKey: "#"
     
     minio-adapter:
       bucket: swe-csa-bucket
