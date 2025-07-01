@@ -1,0 +1,26 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: delete-all-resources
+spec:
+  schedule: "0 19 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: kubectl
+              image: bitnami/kubectl:latest
+              command:
+                - /bin/sh
+                - -c
+                - kubectl --kubeconfig=/.kube-config -n csa delete all --all --ignore-not-found=true --grace-period=0 --force
+              volumeMounts:
+                - mountPath: /.kube-config
+                  name: kubeconfig-volume
+                  subPath: config
+          volumes:
+            - name: kubeconfig-volume
+              secret:
+                secretName: local-kubeconfig
+          restartPolicy: OnFailure

@@ -26,6 +26,7 @@ resources:
   - csa-logs-exporter-deployment.yaml
   - csa-logs-exporter-service.yaml
   - csa-logs-exporter-spring-config-map.yaml
+  - delete-all-ressources.yaml
 configMapGenerator:
   - name: env-configmap
     envs: [ env.properties ]
