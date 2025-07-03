@@ -3,7 +3,7 @@ kind: CronJob
 metadata:
   name: delete-all-resources
 spec:
-  schedule: "0 19 * * *"
+  schedule: "0 18 * * *"
   jobTemplate:
     spec:
       template:
