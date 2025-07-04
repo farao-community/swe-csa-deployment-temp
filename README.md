@@ -41,7 +41,7 @@ kubectl -n csa create secret generic gridcapa-minio-credentials --from-literal='
 
 To deploy on Rte Azure cluster: 
 ```bash
-kubectl kustomize k8s/ | ssh farao@51.137.209.168 kubectl --kubeconfig=.kube/config_new -n csa apply  -f -
+kubectl kustomize k8s/ | ssh farao@XX.XXX.XX.XXX kubectl --kubeconfig=.kube/config -n csa apply  -f -
 ```
 
 **Available Urls:**
